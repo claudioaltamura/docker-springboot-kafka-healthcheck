@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'docker-springboot-kafka-healthcheck'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext {
+  springBootVersion     = '2.1.1.RELEASE'
+  springKafkaVersion    = '2.2.2.RELEASE'
+  guavaVersion          = '27.0.1-jre'
+  jacksonCoreVersion    = '2.9.7'
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-actuator:${springBootVersion}")
+    compile("org.springframework.kafka:spring-kafka:${springKafkaVersion}")
+    compile("com.google.guava:guava:${guavaVersion}")
+    compile("com.fasterxml.jackson.core:jackson-databind:${jacksonCoreVersion}")
+    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    testCompile("org.springframework.kafka:spring-kafka:${springKafkaVersion}")
+    testCompile("org.springframework.kafka:spring-kafka-test:${springKafkaVersion}")
+    testCompile("com.google.guava:guava-testlib:${guavaVersion}")
+}
