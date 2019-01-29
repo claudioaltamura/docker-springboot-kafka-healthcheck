@@ -6,6 +6,12 @@
 spring boot example with docker and kafka
 
 ## Building the example
+
+Build the jar
+
+	./gradlew clean build
+
+
 Build docker image
 
 	docker build --tag docker-springboot-kafka-healthcheck:latest .
@@ -16,30 +22,12 @@ Start current kafka docker container
 
 	docker-compose up
 
-Get the current IP address from kafka
-
-	docker inspect docker-springboot-kafka-healthcheck_helloworld_1 | grep IP
-            "LinkLocalIPv6Address": "",
-            "LinkLocalIPv6PrefixLen": 0,
-            "SecondaryIPAddresses": null,
-            "SecondaryIPv6Addresses": null,
-            "GlobalIPv6Address": "",
-            "GlobalIPv6PrefixLen": 0,
-            "IPAddress": "",
-            "IPPrefixLen": 0,
-            "IPv6Gateway": "",
-                    "IPAMConfig": null,
-                    "IPAddress": "192.168.112.3",
-                    "IPPrefixLen": 20,
-                    "IPv6Gateway": "",
-                    "GlobalIPv6Address": "",
-                    "GlobalIPv6PrefixLen": 0,
 
 Test
 
-	curl http://192.168.112.3:8080/helloworld
+	curl http://localhost:8080/helloworld
 
 
 Checking the healthcheck endpoint
 
-	curl http://192.168.112.3:8080/actuator/health | jq .
+	curl http://localhost:8080/actuator/health | jq .
