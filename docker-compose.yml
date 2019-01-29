@@ -27,12 +27,14 @@ services:
     image: docker-springboot-kafka-healthcheck:latest
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: 'kafka:9092'
+    ports:
+      - "8080:8080"
     depends_on:
       - kafka
     restart: always
     networks:
-      - kafka
-
+      - kafka 
+      
 volumes:
   kafka_data:
 
